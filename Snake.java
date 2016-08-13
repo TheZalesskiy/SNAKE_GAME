@@ -3,15 +3,15 @@ package com.javarush.test.level23.lesson13.big01;
 import java.util.ArrayList;
 
 /**
- * Класс змея
+ * Snake class
  */
 public class Snake
 {
-    //Направление движения змеи
+    //The direction of movement of the snake
     private SnakeDirection direction;
-    //Состояние - жива змея или нет.
+    //Status - the snake alive or not.
     private boolean isAlive;
-    //Список кусочков змеи.
+    //List of snake pieces.
     private ArrayList<SnakeSection> sections = new ArrayList<SnakeSection>();
 
     public Snake(int x, int y)
@@ -52,8 +52,9 @@ public class Snake
     }
 
     /**
-     * Метод перемещает змею на один ход.
-     * Направление перемещения задано переменной direction.
+     * 
+        The method moves the snake one move.
+      * The direction of movement is set to a variable direction.
      */
     public void move()
     {
@@ -70,39 +71,39 @@ public class Snake
     }
 
     /**
-     * Метод перемещает змею в соседнюю клетку.
-     * Кординаты клетки заданы относительно текущей головы с помощью переменных (dx, dy).
+     * The method moves the snake in the next cell.
+      * Kordinaty cells defined from the current head via variable (dx, dy).
      */
     private void move(int dx, int dy)
     {
-        //Создаем новую голову - новый "кусочек змеи".
+        //Create a new head - a new "piece of the snake."
         SnakeSection head = sections.get(0);
         head = new SnakeSection(head.getX() + dx, head.getY() + dy);
 
-        //Проверяем - не вылезла ли голова за границу комнаты
+        //Check - whether the head climbed abroad room
         checkBorders(head);
         if (!isAlive) return;
 
-        //Проверяем - не пересекает ли змея  саму себя
+        //Check - Do not cross the snake itself
         checkBody(head);
         if (!isAlive) return;
 
-        //Проверяем - не съела ли змея мышь.
+        //Check - whether the snake ate the mouse.
         Mouse mouse = Room.game.getMouse();
-        if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) //съела
+        if (head.getX() == mouse.getX() && head.getY() == mouse.getY()) // ate
         {
-            sections.add(0, head);                  //Добавили новую голову
-            Room.game.eatMouse();                   //Хвот не удаляем, но создаем новую мышь.
+            sections.add(0, head);                  //Add new head
+            Room.game.eatMouse();                   //The tail does not remove, but create a new mouse.
         }
         else //просто движется
         {
-            sections.add(0, head);                  //добавили новую голову
-            sections.remove(sections.size() - 1);   //удалили последний элемент с хвоста
+            sections.add(0, head);                  //We added a new head
+            sections.remove(sections.size() - 1);   //removed the last element from the tail
         }
     }
 
     /**
-     *  Метод проверяет - находится ли новая голова в пределах комнаты
+     *  The method checks - whether a new head within the room
      */
     private void checkBorders(SnakeSection head)
     {
@@ -113,7 +114,7 @@ public class Snake
     }
 
     /**
-     *  Метод проверяет - не совпадает ли голова с каким-нибудь участком тела змеи.
+     *  The method checks - whether head matches with any portion of the snake's body.
      */
     private void checkBody(SnakeSection head)
     {
