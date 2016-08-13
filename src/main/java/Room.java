@@ -1,6 +1,3 @@
-package com.javarush.test.level23.lesson13.big01;
-
-
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
@@ -126,7 +123,7 @@ public class Room
         matrix[mouse.getY()][mouse.getX()] = 3;
 
         //Выводим все это на экран
-        String[] symbols = {" . ", " x ", " X ", "^_^", "RIP"};
+        String[] symbols = {" ", " x ", " X ", "^_^", "RIP"};
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
