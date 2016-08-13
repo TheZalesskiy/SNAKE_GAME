@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
 /**
- * Основной класс программы.
+ * The main class of the program.
  */
 public class Room
 {
